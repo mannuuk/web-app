@@ -14,11 +14,21 @@ import Alert from '@material-ui/lab/Alert';
 const useStyles = makeStyles((theme) => ({
     grow: {
         flexGrow: 1,
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: 'column',
+            "& .MuiAppBar-colorPrimary":{
+                padding: '10px 0',
+            },
+        },
         "& .MuiToolbar-regular": {
             [theme.breakpoints.up('lg')]: {
                 maxWidth: '1170px',
                 width: "100%",
-                margin: "0 auto"
+                margin: "0 auto",
+                padding: "0 10px"
+            },
+            [theme.breakpoints.down('xs')]: {
+                flexDirection: 'column'
             },
         }
     },
@@ -41,6 +51,12 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(3),
             width: 'auto',
+        },
+        [theme.breakpoints.down('sm')]: {
+            margin: '0 14px',
+        },
+        [theme.breakpoints.down('xs')]: {
+            margin: 0,
         },
     },
     searchIcon: {
@@ -67,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
     },
     sectionDesktop: {
         display: 'none',
-        [theme.breakpoints.up('md')]: {
+        [theme.breakpoints.up('sm')]: {
             display: 'flex',
         },
     },
@@ -80,12 +96,16 @@ const useStyles = makeStyles((theme) => ({
         "&:hover": {
             background: '#fff',
             opacity: '0.9'
+        },
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: '10px',
         }
     },
     customContainer: {
         width: "100%",
         maxWidth: "1170px",
-        margin: "40px auto"
+        margin: "40px auto",
+        padding: "0 10px"
     },
     activeBtn: {
         textTransform: 'capitalize',
@@ -96,12 +116,27 @@ const useStyles = makeStyles((theme) => ({
         "&:hover": {
             background: '#333',
             opacity: '0.9'
+        },
+        [theme.breakpoints.down('sm')]: {
+            marginLeft: '10px',
         }
     },
     backdrop: {
         zIndex: theme.zIndex.drawer + 1,
         color: '#fff',
     },
+    mobileWrapTopBar:{
+        display: 'none',
+        [theme.breakpoints.down('xs')]: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            width: '100%',
+            margin: '0 0 10px',
+        },
+        '& .MuiTypography-h6':{
+            display: 'block!important'
+        }
+    }
 }));
 export default function Home() {
     const classes = useStyles();
@@ -147,6 +182,29 @@ export default function Home() {
             <div className={classes.grow}>
                 <AppBar position="static">
                     <Toolbar>
+                        <div className={classes.mobileWrapTopBar}>
+                        <Typography className={classes.title} variant="h6" noWrap>
+                            User
+                        </Typography>
+                        <div className={classes.mobileBtnWrap}>
+                        <Button aria-label="show 4 new mails" color="inherit" className={gridView === true ? classes.activeBtn : classes.customBtn}
+                                onClick={() => {
+                                    setListView(false);
+                                    setGridView(true)
+                                }}>
+                                <AppsOutlinedIcon />
+                                Grid View
+                            </Button>
+                            <Button aria-label="show 17 new notifications" color="inherit" className={listView === true ? classes.activeBtn : classes.customBtn}
+                                onClick={() => {
+                                    setListView(true);
+                                    setGridView(false)
+                                }}>
+                                <ListOutlinedIcon />
+                                List View
+                            </Button>
+                        </div>
+                        </div>
                         <Typography className={classes.title} variant="h6" noWrap>
                             User
                         </Typography>
@@ -190,7 +248,7 @@ export default function Home() {
                 <Grid
                     container
                     direction="row"
-                    spacing={3}
+                    spacing={2}
                 >
                     {filterData && filterData.map((item, index) => {
                         if (gridView) {

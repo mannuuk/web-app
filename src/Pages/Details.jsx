@@ -37,7 +37,8 @@ const useStyles = makeStyles((theme) => ({
   customContainer: {
     width: "100%",
     maxWidth: "1170px",
-    margin: "40px auto"
+    margin: "40px auto",
+    padding: "0 10px"
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,

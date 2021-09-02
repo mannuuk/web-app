@@ -5,8 +5,12 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
     gridCardOuter: {
         textDecoration: 'none',
+        "& p":{
+            wordBreak: 'break-all',
+        },
         "&:hover p": {
-            color: 'orange'
+            color: 'orange',
+            wordBreak: 'break-all'
         }
     },
     gridCard: {
@@ -26,11 +30,11 @@ export default function ListView({
 
     return (
         <React.Fragment>
-            <Grid item md={12} lg={12} sm={12}>
+            <Grid item md={12} lg={12} sm={12} xs={12}>
                 <Link to={`/details/${id}`} className={classes.gridCardOuter}>
                     <Card className={classes.gridCard} variant="outlined">
                         <CardContent>
-                            <Grid container spacing="3">
+                            <Grid item container spacing="3" style={{flexWrap: 'nowrap'}}>
                                 <Grid item>
                                     <div className={classes.profilePic}>
                                         <img

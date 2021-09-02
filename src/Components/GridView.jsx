@@ -5,8 +5,11 @@ import {makeStyles,Grid,Typography,Avatar, Card, CardContent
   const useStyles = makeStyles((theme) => ({
     gridCardOuter:{
         textDecoration: 'none',
+        "& p":{
+          wordBreak: 'break-all'
+        },
         "&:hover p":{
-            color: 'orange'
+            color: 'orange',           
         }
     },
     gridCard:{
@@ -34,7 +37,7 @@ export default function GridView({
     
   return (
     <React.Fragment>
-          <Grid item md={4} lg={4} sm={4}>
+          <Grid item md={4} lg={4} sm={4} xs={6}>
               <Link to={`/details/${id}`} className={classes.gridCardOuter}>
               
           <Card className={classes.gridCard} variant="outlined">
